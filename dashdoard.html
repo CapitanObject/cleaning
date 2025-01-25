@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashdoard</title>
+    <style>
+        body {
+            font-family: Arial,  sans-serif;
+            padding: 20 px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1 px solid #ddd;
+        }
+        th, td {
+            padding: 10 px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .btn {
+            padding: 10 px  15px;
+            margin: 5px 0;
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать в личный кабинет</h1>
+    <p> Здравствуйте, {{user.full_name  }}!</p>
+    <a href="/new_request" class="btn">Создайте новый запрос</a>
+    <a href="/logout" class="btn">Выйдите из системы</a>
+    <h2>Ваши запросы</h2>
+    {% if requests %}
+    <table>
+        <thead>
+            <tr>
+                <th>Номер запроса</th>
+                <th>Выбор работы</th>
+                <th>Адресс</th>
+                <th>Дата и время</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+            <tr>
+                <td>{{ request.id }}</td>
+                <td>{{ request.service_type }}</td>
+                <td>{{ request.address }}</td>
+                <td>{{ request.date_time.strftime('%Y-%m-%d' %H:%M) }}</td>
+                <td>{{ request.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>У Вас пока нет запросов. Создайте его, используя кнопку выше</p>
+    {% endif %}
+</body>
+</html>
