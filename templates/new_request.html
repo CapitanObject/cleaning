@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новая форма</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin: 10 px 0 5px;
+        }
+        input, select, textarea, button{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15 px;
+            border: 1 px solid #ddd;
+            border-radius: 5px;}
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+            
+        
+        button:hover {
+            background-color: #0056b3;}
+        .note {
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Создайте новый запрос</h1>
+    <form method="POST" action="/new_request"
+        <label for="address">Адрес</label>
+        <template id="adress" name="address" rown="3" placeholder="Enter the service adress" required></template>
+        <label for="phone">Телефон</label>
+        <input type="text" id="phone" name="phone" placeholder="+7(xxx)-XXX-XX-XX" pattern ="\\+7\\(\\d{3}\\)-\\d{3}-\\d{2}-d{2}" required>
+        <p class="note">Format +7(xxx)-XXX-XX-XX</p>
+        <label for="service_type">Виды сервиса</label>
+        <select id="service_type" name="service_type" required>
+            <option value="" disabled selected>Выберите услугу</option>
+            <option value="Ceneral Cleaning" >Генеральная уборка</option>
+            <option value="Deep Cleaning" >Уборка всего дома</option>
+            <option value="Post-Construction Cleaning">Уборка после ремонта</option>
+            <option value="Carpet & Furniture Cleaning">Чистка ковров и мебели</option>
+            <option value="Other">Другие услуги</option>
+        </select>
+        <div id="custom_service_section" style="display: none;">
+            <label for = "custom_service">Описание индивидуальной услуги</label>
+            <textarea id="custom_service" name="custom_service" rows="3" placeholder="Опишите индивидуальный сервис"></textarea>
+        </div>
+        <label for="date_time">Дата и время</label>
+        <input type ="datetime-local" id="date_time" name="date_time" required>
+        <label for="payment_type">Тип оплаты</label>
+        <select id="payment_type" namt="payment_type" required>
+            <option value="cash">Наличные</option>
+            <option value="card">Картой</option>
+        </select>
+        <button type="submit">Отправить запрос</button>
+    </form>
+    <script>
+        const serviceType = document.getElementById('service_type')
+        const customServiceSection = document.getElementById('custom_strvice_section');
+        serviceType.addEventListener('change', function() {
+            if (serviceType.value==='Other') {
+                customServiceSection.style.display ='block';
+            } else {
+                customServiceSection.style.display ='none';
+            }
+        })
+    </script>
+
+</body>
+</html>
